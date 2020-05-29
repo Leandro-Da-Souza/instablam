@@ -1,0 +1,34 @@
+{
+    "short_name": "InstaBlam",
+    "name": "InstaBlam: An Instagram Clone",
+    "description": "An Instagram Clone PWA Assignment",
+    "icons": [
+        {
+            "src": "/img/security-camera-64x64.png",
+            "type": "image/png",
+            "sizes": "64x64"
+        },
+        {
+            "src": "/img/security-camera-128x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/img/security-camera-128x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/img/security-camera-256x256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        }
+    ],
+    "start_url": "/index.html",
+    "background_color": "#000",
+    "theme_color": "#000",
+    "display": "standalone",
+    "scope": ".",
+    "lang": "en-us",
+    "dir": "ltr"
+}
