@@ -1,4 +1,5 @@
 let stream = {};
+let img = document.querySelector('#photo');
 
 async function captureImage(stream) {
     const mediaTrack = stream.getVideoTracks()[0];
@@ -27,9 +28,92 @@ async function getMedia() {
 
 getMedia();
 
+function greyScale() {
+    Caman('#photo', function () {
+        this.revert();
+        this.greyscale().render();
+    });
+}
+
+function gamma() {
+    Caman('#photo', function () {
+        this.revert();
+        this.gamma(1.5).render();
+    });
+}
+
+function moreGamma() {
+    Caman('#photo', function () {
+        this.revert();
+        this.gamma(3).render();
+    });
+}
+
+function vintage() {
+    Caman('#photo', function () {
+        this.revert();
+        this.vintage().render();
+    });
+}
+
+function nostalgia() {
+    Caman('#photo', function () {
+        this.revert();
+        this.nostalgia().render();
+    });
+}
+
 document.querySelector('#takePhoto').addEventListener('click', () => {
-    console.log('hello');
     captureImage(stream);
+});
+
+document.querySelector('#grey').addEventListener('click', () => {
+    console.log(img.src);
+    if (img.src === 'https://localhost:5500/') {
+        alert('Please Take A Photo First');
+        return;
+    } else {
+        greyScale();
+    }
+});
+
+document.querySelector('#gamma').addEventListener('click', () => {
+    console.log(img.src);
+    if (img.src === 'https://localhost:5500/') {
+        alert('Please Take A Photo First');
+        return;
+    } else {
+        gamma();
+    }
+});
+
+document.querySelector('#gammaer').addEventListener('click', () => {
+    console.log(img.src);
+    if (img.src === 'https://localhost:5500/') {
+        alert('Please Take A Photo First');
+        return;
+    } else {
+        moreGamma();
+    }
+});
+
+document.querySelector('#vintage').addEventListener('click', () => {
+    console.log(img.src);
+    if (img.src === 'https://localhost:5500/') {
+        alert('Please Take A Photo First');
+        return;
+    } else {
+        vintage();
+    }
+});
+document.querySelector('#nostalgia').addEventListener('click', () => {
+    console.log(img.src);
+    if (img.src === 'https://localhost:5500/') {
+        alert('Please Take A Photo First');
+        return;
+    } else {
+        nostalgia();
+    }
 });
 
 if ('serviceWorker' in navigator) {
