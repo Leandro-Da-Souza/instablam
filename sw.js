@@ -1,4 +1,4 @@
-let CACHE_STATIC_NAME = 'static-v1';
+let CACHE_STATIC_NAME = 'static-v10';
 let CACHE_DYNAMIC_NAME = 'dynamic-v1';
 
 self.addEventListener('install', (event) => {
@@ -17,9 +17,26 @@ self.addEventListener('install', (event) => {
         ]);
     });
 });
+
 self.addEventListener('activate', (event) => {
     console.log('Service Worker Activated');
+    event.waitUntil(
+        caches.keys().then((keyList) => {
+            return Promise.all(
+                keyList.map((key) => {
+                    if (
+                        key !== CACHE_STATIC_NAME &&
+                        key !== CACHE_DYNAMIC_NAME
+                    ) {
+                        console.log('[Service Worker] Removing Old Cache', key);
+                        caches.delete(key);
+                    }
+                })
+            );
+        })
+    );
 });
+
 self.addEventListener('fetch', (event) => {
     console.log('Service Worker Fetch');
     event.respondWith(
