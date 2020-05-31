@@ -7,6 +7,7 @@ self.addEventListener('install', (event) => {
         cache.addAll([
             '/',
             '/index.html',
+            '/offline.html',
             '/css/css.css',
             '/js/js.js',
             '/img/security-camera-64x64.png',
@@ -26,12 +27,18 @@ self.addEventListener('fetch', (event) => {
             if (res) {
                 return res;
             } else {
-                return fetch(event.request).then((response) => {
-                    return caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-                        cache.put(event.request.url, response.clone());
-                        return response;
+                return fetch(event.request)
+                    .then((response) => {
+                        return caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
+                            cache.put(event.request.url, response.clone());
+                            return response;
+                        });
+                    })
+                    .catch((err) => {
+                        return caches.open(CACHE_STATIC_NAME).then((cache) => {
+                            return cache.match('/offline.html');
+                        });
                     });
-                });
             }
         })
     );
